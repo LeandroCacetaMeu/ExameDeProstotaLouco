@@ -1,2 +1,0 @@
-# ExameDeProstotaLouco
-Meus codigos negros
