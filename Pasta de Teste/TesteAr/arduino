@@ -1,0 +1,26 @@
+int led1 = 7;
+int led2 = 6;
+
+void setup() {
+  pinMode(led1, OUTPUT);
+  pinMode(led2, OUTPUT);
+  Serial.begin(9600); // Inicializa a comunicação serial com a taxa de baud de 9600
+}
+
+void loop() {
+  while (Serial.available()) {
+    char situacao = Serial.read();
+    if (situacao == 'A') {
+      digitalWrite(led1, HIGH);
+    }
+    if (situacao == 'B') {
+      digitalWrite(led2, HIGH);
+    }
+    if (situacao == 'a') {
+      digitalWrite(led1, LOW);
+    }
+    if (situacao == 'b') {
+      digitalWrite(led2, LOW);
+    }
+  }
+}
