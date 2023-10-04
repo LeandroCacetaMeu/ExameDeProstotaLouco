@@ -1,0 +1,33 @@
+
+import serial
+import time
+
+ser = serial.Serial('COM4', 9600)
+
+# Função para enviar um estado ao Arduino
+def enviar_estado(estado):
+    ser.write(estado.encode())
+    time.sleep(1)
+
+# Função para desligar todos os LEDs
+def desligar_leds():
+    enviar_estado('0')
+
+while True:
+    resposta_correta = False
+
+    # Pergunta ao usuário
+    resposta = input("Qual é a resposta? (S/N): ")
+    if resposta.lower() == 's':s
+    
+        resposta_correta = True
+
+    if resposta_correta:
+        enviar_estado('2')  # Resposta correta: LED 2 ligado
+    else:
+        enviar_estado('3')  # Resposta incorreta: LED 3 ligado
+
+    # Agora, desligue todos os LEDs antes de fazer a próxima pergunta
+    desligar_leds()
+
+
