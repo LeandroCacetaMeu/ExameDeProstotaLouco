@@ -1,0 +1,34 @@
+Arduino
+
+int led1 = 7;  // Pino do LED 1
+int led2 = 6;  // Pino do LED 2
+int led3 = 5;  // Pino do LED 3
+char estado = '0';  // Inicializa o estado com '0'
+
+void setup() {
+  Serial.begin(9600);  // Inicia a comunicação serial
+  pinMode(led1, OUTPUT);
+  pinMode(led2, OUTPUT);
+  pinMode(led3, OUTPUT);
+}
+
+void loop() {
+  if (Serial.available() > 0) {
+    estado = Serial.read();  // Lê o estado enviado pelo Python
+    if (estado == '1') {
+      digitalWrite(led1, HIGH);  // Liga o LED 1
+    } else {
+      digitalWrite(led1, LOW);  // Desliga o LED 1
+    }
+    if (estado == '2') {
+      digitalWrite(led2, HIGH);  // Liga o LED 2
+    } else {
+      digitalWrite(led2, LOW);  // Desliga o LED 2
+    }
+    if (estado == '3') {
+      digitalWrite(led3, HIGH);  // Liga o LED 3
+    } else {
+      digitalWrite(led3, LOW);  // Desliga o LED 3
+    }
+  }
+}
