@@ -6,3 +6,5 @@ pip3 install pyfirmata
 pip install pyserial==2.7
 
 pip install Pillow
+
+pip install tk
