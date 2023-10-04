@@ -1,0 +1,23 @@
+import serial
+
+porta = "COM4"
+Velocidade = 9600
+ 
+conexao = serial.Serial(porta, Velocidade)
+
+print("O que deseja ligar?")
+
+while True:
+    opcao = input("")
+    
+    if opcao == "a":
+        conexao.write(b'a')
+
+    if opcao == "A":
+        conexao.write(b'A')
+
+    if opcao == "B":
+        conexao.write(b'B')
+
+    if opcao == "b":
+        conexao.write(b'b')
