@@ -1,0 +1,17 @@
+
+import serial
+import subprocess
+
+# Configurar a porta serial - verifique qual porta COM o Arduino está usando
+ser = serial.Serial('COM4', 9600)  # Substitua 'COMX' pelo nome da porta serial do Arduino
+
+while True:
+    # Ler dados da porta serial
+    data = ser.readline().decode('utf-8').strip()
+    
+    # Verificar se o Arduino enviou a mensagem "Botao Pressionado"
+    if data == "Botao Pressionado":
+        print("Botão pressionado! Executando o programa Python...")
+
+
+
