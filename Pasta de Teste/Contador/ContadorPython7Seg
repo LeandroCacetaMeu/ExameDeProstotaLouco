@@ -1,0 +1,252 @@
+import tkinter as tk
+from tkinter import *
+import tkinter.ttk
+import PIL
+import os
+from PIL import Image, ImageTk
+import urllib
+import urllib.request
+from tkinter.ttk import Label
+import random
+from random import shuffle
+import serial
+import time
+
+# Abre a porta serial para comunicação com o Arduino (ajuste a porta conforme necessário)
+arduino = serial.Serial('COM3', 9600)
+
+acertos = 0
+
+def enviar_acertos():
+    comando = "A:" + str(acertos) + '\n'  # Envie "A:" seguido do número de acertos e uma nova linha
+    arduino.write(comando.encode('utf-8'))
+
+
+def creditospropaganda():
+    creditos_propaganda = tk.Tk()
+    creditos_propaganda.title('Créditos')
+    creditos_propaganda.geometry('1366x768')
+    creditos_propaganda.configure(background='#111111')
+    textocreditos = Label(creditos_propaganda, text='Equipe responsável pela propaganda da feira:')
+    botaoencerrar = tk.Button(creditos_propaganda, text='Sair', command=creditos_propaganda.destroy)
+    textocreditos.pack()
+    botaoencerrar.pack()
+
+
+def creditosperguntas():
+    creditos_perguntas = tk.Tk()
+    creditos_perguntas.title('Créditos das perguntas')
+    creditos_perguntas.geometry('1366x768')
+    creditos_perguntas.configure(background='#111111')
+    textocreditos = Label(creditos_perguntas,
+                          text='Equipe responsável pela criação das perguntas: Vitórias, Patrine, Rafael, Maisa, Pedro, Arthur, Sarah ',
+                          background='#111111',
+                          foreground='white',
+                          font=('Bebas Neue', 16)
+                          )
+    botaoproxcred = tk.Button(creditos_perguntas, text='Próxima equipe', command=creditospropaganda,
+                              background='#111111',
+                              foreground='white',
+                              font=('Bebas Neue', 16)
+                              )
+    textocreditos.pack()
+    botaoproxcred.pack()
+
+
+def creditosimagens():
+    creditos_imagens = tk.Tk()
+    creditos_imagens.title('Créditos das imagens')
+    creditos_imagens.geometry('1366x768')
+    creditos_imagens.configure(background='#111111')
+    textocreditos = Label(creditos_imagens, text='Equipe das imagens: Juliana, Yasmin, Matheus, Nicolas, Miguel',
+                          background='#111111',
+                          foreground='white',
+                          font=('Bebas Neue', 16)
+                          )
+    botaoproxcred = tk.Button(creditos_imagens, text='Próxima equipe', command=creditosperguntas,
+                              background='#111111',
+                              foreground='white',
+                              font=('Bebas Neue', 16)
+                              )
+    textocreditos.pack()
+    botaoproxcred.pack()
+
+
+def creditosprogramadores():
+    creditos_programadores = tk.Tk()
+    creditos_programadores.title('Equipe responsável pela modelagem e criação do código para o programa.')
+    creditos_programadores.geometry('1366x768')
+    creditos_programadores.configure(background='#111111')
+    textocreditos = Label(creditos_programadores,
+                          text='Equipe de programação: Enzo Fernandes, Kleber Rogério, Gabryel Pereira, Leandro Kenji, Paulo Roberto,',
+                          background='#111111',
+                          foreground='white',
+                          font=('Bebas Neue', 16)
+                          )
+    botaoproxcred = tk.Button(creditos_programadores, text='Próxima equipe', command=creditosimagens,
+                              background='#111111',
+                              foreground='white',
+                              font=('Bebas Neue', 16),
+                              )
+    textocreditos.pack()
+    botaoproxcred.pack()
+
+
+## Funções com relação ao ARDUINO:
+
+
+
+
+
+
+## Janela principal:
+
+janela_principal = tk.Tk()
+janela_principal.title('Menu principal')
+janela_principal.geometry('1366x768')
+urlimagem = urllib.request.urlopen('https://i.postimg.cc/3RD94Fc1/logo.png')
+img = ImageTk.PhotoImage(file=urlimagem, master=janela_principal)
+imagemtitulo = Label(janela_principal, image=img)
+botaocreditos = tk.Button(janela_principal,
+                          text='Ver créditos',
+                          background='#111111',
+                          foreground='white',
+                          font=('Bebas Neue', 16),
+                          command=creditosprogramadores)
+botaoinicio = tk.Button(janela_principal,
+                        text='Clique para iniciar!',
+                        background="#111111",
+                        foreground="white",
+                        font=("Bebas Neue", 16),
+                        command=janela_principal.destroy)
+botaoencerrar = tk.Button(janela_principal, text='Clique para encerrar o programa!',
+                          background="#111111",
+                          foreground="white",
+                          font=("Bebas Neue", 16),
+                          command=exit)
+textointro = Label(janela_principal, text='Bem vindo ao Projeto da Feira de Matemática!',
+                   background="#111111",
+                   foreground="white",
+                   font=("Bebas Neue", 16))
+textosubintro = Label(janela_principal, text='Um projeto realizado pela turma do 3°B!',
+                      background="#111111",
+                      foreground="white",
+                      font=("Bebas Neue", 16))
+imagemtitulo.pack()
+textointro.pack()
+textosubintro.pack()
+botaoinicio.pack()
+botaocreditos.pack()
+botaoencerrar.pack()
+janela_principal.configure(bg='#111111')
+janela_principal.mainloop()
+
+## Definição das questões
+lista = [1, 2, 3, 4, 5, 6, 7, 8, 9]
+shuffle(lista)
+ultimoitem = lista[-1]
+print(lista)
+
+for questao in lista:
+
+    if questao == 5:
+        def correcao():
+            janelacorrecao = tk.Tk()
+            janelacorrecao.title('Correção')
+            janelacorrecao.geometry('430x600')
+            janelacorrecao.configure(background='#111111')
+            urlimagemcorrecao = urllib.request.urlopen(
+                    'https://i.postimg.cc/fR6w7Hr0/corre-transla-o-redimensionada.png')
+            imgcorrecao = ImageTk.PhotoImage(file=urlimagemcorrecao, master=janelacorrecao)
+            imagemcorrecao = Label(janelacorrecao, image=imgcorrecao)
+            imagemcorrecao.pack()
+            janelacorrecao.mainloop()
+
+
+        def perguntaerrada():
+            janelaerro = tk.Tk()
+            janelaerro.title('Você errou!')
+            janelaerro.geometry('200x200')
+            janelaerro.configure(background='#111111')
+            textoerro = Label(janelaerro, text='Sinto muito, você errou!',
+                                  background='#111111',
+                                  foreground='white',
+                                  font=('Bebas Neue', 12)
+                                  )
+            button = tk.Button(janelaerro, text='Saiba o porquê.', command=correcao,
+                                   background='#111111',
+                                   foreground='white',
+                                   font=('Bebas Neue', 12)
+                                   )
+            textoerro.pack()
+            button.pack()
+            janelaerro.mainloop()
+
+
+        def answer():
+            getresposta = resposta.get()
+            if getresposta == 'Translação' or getresposta == 'translação':
+                if questao == ultimoitem:
+                    janelaultima.destroy()
+                    acertos += 1
+                    print("Resposta correta! Acertos: " + str(acertos))
+                    enviar_acertos(1)  
+                else:
+                    janela5.destroy()
+                    acertos += 1
+                    print("Resposta correta! Acertos: " + str(acertos))
+                    enviar_acertos(1)  
+            else:
+                perguntaerrada()
+
+
+        if questao == ultimoitem:
+            janelaultima = tk.Tk()
+            janelaultima.title('Última questão')
+            janelaultima.geometry('1366x768')
+            janelaultima.configure(background='#111111')
+            textoquestao = Label(janelaultima,
+                                     text='Descreva qual transformação geométrica foi realizada nessa figura:',
+                                     background='#111111',
+                                     foreground='white',
+                                     font=('Bebas Neue', 20)
+                                     )
+            buttonenter = tk.Button(janelaultima, text='Verificar',
+                                        background='#111111',
+                                        foreground='white',
+                                        font=('Bebas Neue', 16),
+                                        command=answer)
+            urlenunciado = urllib.request.urlopen('https://i.postimg.cc/NMSmYyDL/ex3-un-2.png')
+            imgenunciado = ImageTk.PhotoImage(file=urlenunciado, master=janelaultima)
+            imagemenunciado = Label(janelaultima, image=imgenunciado)
+            resposta = tk.Entry(janelaultima)
+            textoquestao.pack()
+            imagemenunciado.pack()
+            resposta.pack()
+            buttonenter.pack()
+            janelaultima.mainloop()
+
+        else:
+            janela5 = tk.Tk()
+            janela5.title('Pergunta 5')
+            janela5.geometry('1366x768')
+            janela5.configure(background='#111111')
+            textoquestao = Label(janela5, text='Descreva qual transformação geométrica foi realizada nessa figura:',
+                                     background='#111111',
+                                     foreground='white',
+                                     font=('Bebas Neue', 20)
+                                     )
+            buttonenter = tk.Button(janela5, text='Verificar',
+                                        background='#111111',
+                                        foreground='white',
+                                        font=('Bebas Neue', 16),
+                                        command=answer)
+            urlenunciado = urllib.request.urlopen('https://i.postimg.cc/NMSmYyDL/ex3-un-2.png')
+            imgenunciado = ImageTk.PhotoImage(file=urlenunciado, master=janela5)
+            imagemenunciado = Label(janela5, image=imgenunciado)
+            resposta = tk.Entry(janela5)
+            textoquestao.pack()
+            imagemenunciado.pack()
+            resposta.pack()
+            buttonenter.pack()
+            janela5.mainloop()
