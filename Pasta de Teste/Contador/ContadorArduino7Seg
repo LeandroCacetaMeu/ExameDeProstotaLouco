@@ -6,116 +6,126 @@ int E = 7;
 int F = 8;
 int G = 9;
 
-contador = 0;
+int acertos = 0;
 
 void setup(){
-pinMode(A, OUTPUT);
-pinMode(B, OUTPUT);
-pinMode(C, OUTPUT);
-pinMode(D, OUTPUT);
-pinMode(E, OUTPUT);
-pinMode(F, OUTPUT):
-pinMode(G, OUTOUT):
-
+  pinMode(A, OUTPUT);
+  pinMode(B, OUTPUT);
+  pinMode(C, OUTPUT);
+  pinMode(D, OUTPUT);
+  pinMode(E, OUTPUT);
+  pinMode(F, OUTPUT);
+  pinMode(G, OUTPUT);
 }
 
 void loop(){
+  if (Serial.available() > 0) {
+    String mensagem = Serial.readStringUntil('\n');
+    if (mensagem.startsWith("A:")) {
+      acertos = mensagem.substring(2).toInt();
+      Serial.println("Número de acertos atualizado para: " + String(acertos));
+      // Agora você pode exibir o número de acertos no display de 7 segmentos
+    }
+  }
+  
+  if (acertos == 0){
+    digitalWrite(A, HIGH);
+    digitalWrite(B, HIGH);
+    digitalWrite(C, HIGH);
+    digitalWrite(D, HIGH);
+    digitalWrite(E, HIGH);
+    digitalWrite(F, HIGH);
+   digitalWrite(G, LOW);
+  }
 
-digitalRead = contador
+  if (acertos == 1){
+    digitalWrite(A, LOW);
+    digitalWrite(B, HIGH);
+    digitalWrite(C, HIGH);
+    digitalWrite(D, LOW);
+    digitalWrite(E, LOW);
+    digitalWrite(F, LOW);
+    digitalWrite(G, LOW);
+  }
 
-if (contador == 0){
-digitalWrite(A, HIGH);
-digitalWrite(B, HIGH);
-digitalWrite(C, HIGH);
-digitalWrite(D, HIGH);
-digitalWrite(E, HIGH);
-digitalWrite(F, HIGH);
-digitalWrite(G, LOW);
-}
+  if (acertos == 2){
+    digitalWrite(A, HIGH);
+    digitalWrite(B, HIGH);
+    digitalWrite(C, LOW);
+    digitalWrite(D, HIGH);
+    digitalWrite(E, HIGH);
+    digitalWrite(F, LOW);
+    digitalWrite(G, HIGH);
+  }
 
-if (contador == 1){
-digitalWrite(A, LOW);
-digitalWrite(B, HIGH);
-digitalWrite(C, HIGH);
-digitalWrite(D, LOW);
-digitalWrite(E, LOW);
-digitalWrite(F, LOW);
-digitalWrite(G, LOW);
-}
+  if (acertos == 3){
+    digitalWrite(A, HIGH);
+    digitalWrite(B, HIGH);
+    digitalWrite(C, HIGH);
+    digitalWrite(D, HIGH);
+    digitalWrite(E, LOW);
+    digitalWrite(F, LOW);
+    digitalWrite(G, HIGH);
+  }
 
-if (contador == 2){
-digitalWrite(A, HIGH);
-digitalWrite(B, HIGH);
-digitalWrite(C, LOW);
-digitalWrite(D, HIGH);
-digitalWrite(E, HIGH);
-digitalWrite(F, LOW);
-digitalWrite(G, HIGH);
-}
-if (contador == 3){
-digitalWrite(A, HIGH);
-digitalWrite(B, HIGH);
-digitalWrite(C, HIGH);
-digitalWrite(D, HIGH);
-digitalWrite(E, LOW;
-digitalWrite(F, LOW);
-digitalWrite(G, HIGH);
-}
-if (contador == 4){
-digitalWrite(A, LOW);
-digitalWrite(B, HIGH);
-digitalWrite(C, HIGH);
-digitalWrite(D, LOW);
-digitalWrite(E, LOW);
-digitalWrite(F, HIGH);
-digitalWrite(G, HIGH);
-}
-if (contador == 5){
-digitalWrite(A, HIGH);
-digitalWrite(B, LOW);
-digitalWrite(C, HIGH);
-digitalWrite(D, HIGH);
-digitalWrite(E, LOW);
-digitalWrite(F, HIGH);
-digitalWrite(G, HIGH);
-}
-if (contador == 6){
-digitalWrite(A, HIGH);
-digitalWrite(B, LOW);
-digitalWrite(C, HIGH);
-digitalWrite(D, HIGH);
-digitalWrite(E, HIGH);
-digitalWrite(F, HIGH);
-digitalWrite(G, HIGH);
-}
-if (contador == 7){
-digitalWrite(A, HIGH);
-digitalWrite(B, HIGH);
-digitalWrite(C, HIGH);
-digitalWrite(D, LOW);
-digitalWrite(E, LOW);
-digitalWrite(F, LOW);
-digitalWrite(G, LOW);
-}
+  if (acertos == 4){
+    digitalWrite(A, LOW);
+    digitalWrite(B, HIGH);
+    digitalWrite(C, HIGH);
+    digitalWrite(D, LOW);
+    digitalWrite(E, LOW);
+    digitalWrite(F, HIGH);
+    digitalWrite(G, HIGH);
+  }
 
-if (contador == 8){
-digitalWrite(A, HIGH);
-digitalWrite(B, HIGH);
-digitalWrite(C, HIGH);
-digitalWrite(D, HIGH);
-digitalWrite(E, HIGH);
-digitalWrite(F, HIGH);
-digitalWrite(G, HIGH);
-}
+  if (acertos == 5){
+    digitalWrite(A, HIGH);
+    digitalWrite(B, LOW);
+    digitalWrite(C, HIGH);
+    digitalWrite(D, HIGH);
+    digitalWrite(E, LOW);
+    digitalWrite(F, HIGH);
+    digitalWrite(G, HIGH);
+  }
 
-if (contador == 9){
-digitalWrite(A, HIGH);
-digitalWrite(B, HIGH);
-digitalWrite(C, HIGH);
-digitalWrite(D, HIGH);
-digitalWrite(E, LOW);
-digitalWrite(F, HIGH);
-digitalWrite(G, HIGH);
-}
+  if (acertos == 6){
+    digitalWrite(A, HIGH);
+    digitalWrite(B, LOW);
+    digitalWrite(C, HIGH);
+    digitalWrite(D, HIGH);
+    digitalWrite(E, HIGH);
+    digitalWrite(F, HIGH);
+    digitalWrite(G, HIGH);
+  }
+
+  if (acertos == 7){
+    digitalWrite(A, HIGH);
+    digitalWrite(B, HIGH);
+    digitalWrite(C, HIGH);
+    digitalWrite(D, LOW);
+    digitalWrite(E, LOW);
+    digitalWrite(F, LOW);
+    digitalWrite(G, LOW);
+  }
+
+  if (acertos == 8){
+    digitalWrite(A, HIGH);
+    digitalWrite(B, HIGH);
+    digitalWrite(C, HIGH);
+    digitalWrite(D, HIGH);
+    digitalWrite(E, HIGH);
+    digitalWrite(F, HIGH);
+    digitalWrite(G, HIGH);
+  }
+
+  if (acertos == 9){
+    digitalWrite(A, HIGH);
+    digitalWrite(B, HIGH);
+    digitalWrite(C, HIGH);
+    digitalWrite(D, HIGH);
+    digitalWrite(E, LOW);
+    digitalWrite(F, HIGH);
+    digitalWrite(G, HIGH);
+  }
 
 }
