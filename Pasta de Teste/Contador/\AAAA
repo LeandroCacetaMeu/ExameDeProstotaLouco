@@ -1,0 +1,12 @@
+import serial
+
+ser = serial.Serial('COM4', 9600)
+
+while True:
+    linha = input("Digite o número da linha (1 ou 2): ")
+    mensagem = input("Digite a mensagem: ")
+    
+    if linha == '1' or linha == '2':
+        ser.write((linha + ' ' + mensagem + "\n").encode('utf-8'))
+    else:
+        print("Número de linha inválido. Use '1' ou '2'.")
