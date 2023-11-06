@@ -1,0 +1,22 @@
+import serial
+import time
+
+# Configurar a porta serial. Verifique a porta serial correta em sua configuração do Arduino.
+arduino_port = 'COM4'  # Substitua pela porta correta
+arduino_baud = 9600
+ser = serial.Serial(arduino_port, arduino_baud, timeout=1)
+
+def send_command(command):
+    ser.write(command.encode())
+    time.sleep(0.1)
+
+while True:
+    answer = input("Resposta (C para correta, W para errada, Q para sair): ")
+    if answer == 'C':
+        send_command('C')  # Acende o LED de resposta correta
+    elif answer == 'W':
+        send_command('W')  # Acende o LED de resposta errada
+    elif answer == 'Q':
+        send_command('D')  # Acende o LED padrão (nenhuma resposta)
+
+ser.close()
