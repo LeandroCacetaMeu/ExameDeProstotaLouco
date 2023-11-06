@@ -1,0 +1,31 @@
+int correctLedPin = 13;  // Pino do LED para respostas corretas
+int wrongLedPin = 8;    // Pino do LED para respostas erradas
+int defaultLedPin = 7;  // Pino do LED padrão
+
+void setup() {
+  pinMode(correctLedPin, OUTPUT);
+  pinMode(wrongLedPin, OUTPUT);
+  pinMode(defaultLedPin, OUTPUT);
+
+  Serial.begin(9600);
+  digitalWrite(defaultLedPin, HIGH);
+}
+
+void loop() {
+  if (Serial.available() > 0) {
+    char command = Serial.read();
+    if (command == 'C') {
+      digitalWrite(correctLedPin, HIGH);
+      digitalWrite(wrongLedPin, LOW);
+      digitalWrite(defaultLedPin, LOW);
+    } else if (command == 'W') {
+      digitalWrite(correctLedPin, LOW);
+      digitalWrite(wrongLedPin, HIGH);
+      digitalWrite(defaultLedPin, LOW);
+    } else if (command == 'D') {
+      digitalWrite(correctLedPin, LOW);
+      digitalWrite(wrongLedPin, LOW);
+      digitalWrite(defaultLedPin, HIGH);
+    }
+  }
+}
