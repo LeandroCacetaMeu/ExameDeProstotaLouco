@@ -1,0 +1,80 @@
+#include <LiquidCrystal.h>
+
+LiquidCrystal lcd(12,11,5,4,3,2);
+
+const int botaoA = 2;  // Pino para o botão A
+const int botaoB = 3;  // Pino para o botão B
+const int botaoC = 4;  // Pino para o botão C
+const int botaoD = 5;  // Pino para o botão D
+int resposta = 0;
+
+int correctLedPin = 13;  // Pino do LED para respostas corretas
+int wrongLedPin = 8;    // Pino do LED para respostas erradas
+int defaultLedPin = 7;  // Pino do LED padrão
+
+int contador = 0; //Variavel de Leitura
+
+void setup() {
+
+  pinMode(botaoA, INPUT_PULLUP);
+  pinMode(botaoB, INPUT_PULLUP);
+  pinMode(botaoC, INPUT_PULLUP);
+  pinMode(botaoD, INPUT_PULLUP);
+  
+  pinMode(correctLedPin, OUTPUT);
+  pinMode(wrongLedPin, OUTPUT);
+  pinMode(defaultLedPin, OUTPUT);
+  
+  lcd.begin(16, 2);
+  Serial.begin(9600);
+  lcd.setCursor(0, 0);
+  lcd.print("Geomatrix");
+  delay(2000);
+}
+
+void loop() {
+  if (digitalRead(button1Pin) == LOW) {
+    resposta = 1;
+  } else if (digitalRead(button2Pin) == LOW) {
+    resposta = 2;
+  } else if (digitalRead(button3Pin) == LOW) {
+    resposta = 3;
+  } else if (digitalRead(button4Pin) == LOW) {
+    resposta = 4;
+  } else {
+    resposta = 0;
+  }
+
+  // Envie a resposta para o Python
+  Serial.println(resposta);
+  delay(100);
+
+  if (Serial.available() > 0) {
+    char command = Serial.read();
+    if (command == 'C') {
+      digitalWrite(correctLedPin, HIGH);
+      delay(1000);
+      digitalWrite(correctLedPin, LOW);
+      digitalWrite(wrongLedPin, LOW);
+      digitalWrite(defaultLedPin, LOW);
+      
+      contador = contador + 1;
+      lcd.setCursor(0, 0);
+      lcd.print("Contador:");
+      lcd.setCursor(0, 1);
+      lcd.print(conta);
+  } 
+    else if (command == 'W') {
+      digitalWrite(correctLedPin, LOW);
+      digitalWrite(wrongLedPin, HIGH);
+      delay(1000);
+      digitalWrite(wrongLedPin, LOW);
+      digitalWrite(defaultLedPin, LOW);
+  } 
+    else {
+      digitalWrite(correctLedPin, LOW);
+      digitalWrite(wrongLedPin, LOW);
+      digitalWrite(defaultLedPin, HIGH);
+    }
+  }
+}
