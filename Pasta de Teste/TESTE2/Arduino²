@@ -5,7 +5,7 @@ LiquidCrystal lcd(12,11,5,4,3,2);
 int correctLedPin = 13;  // Pino do LED para respostas corretas
 int wrongLedPin = 8;    // Pino do LED para respostas erradas
 int defaultLedPin = 7;  // Pino do LED padrão
-
+int contador = 0;
 
 void setup() {
   pinMode(correctLedPin, OUTPUT);
@@ -13,7 +13,9 @@ void setup() {
   pinMode(defaultLedPin, OUTPUT);
   lcd.begin(16, 2);
   Serial.begin(9600);
-  digitalWrite(defaultLedPin, HIGH);
+  lcd.setCursor(0, 0);
+  lcd.print("Geomatrix");
+  delay(2000);
 }
 
 void loop() {
@@ -25,6 +27,12 @@ void loop() {
       digitalWrite(correctLedPin, LOW);
       digitalWrite(wrongLedPin, LOW);
       digitalWrite(defaultLedPin, LOW);
+
+        contador = contador + 1;
+ 	 lcd.setCursor(0, 0);
+	  lcd.print("Contador:");
+ 	 lcd.setCursor(0, 1);
+	  lcd.print(conta);
 	} 
     else if (command == 'W') {
       digitalWrite(correctLedPin, LOW);
@@ -40,3 +48,5 @@ void loop() {
     }
   }
 }
+
+
