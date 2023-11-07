@@ -1,0 +1,27 @@
+import serial
+
+# Inicialize a porta serial (ajuste a porta e a velocidade apropriadas)
+arduino = serial.Serial('COM3', 9600)
+
+# Função para fazer uma pergunta com 4 alternativas
+def fazer_pergunta(pergunta, alternativas):
+    print(pergunta)
+    for i, alternativa in enumerate(alternativas, start=1):
+        print(f"{i}: {alternativa}")
+    
+    # Aguarda a resposta do Arduino
+    resposta = int(arduino.readline().strip())
+    
+    # Verifica a resposta
+    if 1 <= resposta <= 4:
+        print(f"Você escolheu a alternativa {resposta}: {alternativas[resposta - 1]}")
+    else:
+        print("Resposta inválida")
+
+# Exemplo de uso
+pergunta = "Qual é a capital do Brasil?"
+alternativas = ["Brasília", "Rio de Janeiro", "São Paulo", "Belo Horizonte"]
+fazer_pergunta(pergunta, alternativas)
+
+# Feche a porta serial quando terminar
+arduino.close()
