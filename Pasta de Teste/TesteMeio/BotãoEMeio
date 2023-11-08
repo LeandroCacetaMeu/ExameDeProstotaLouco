@@ -1,0 +1,46 @@
+const int botaoA = A0;
+const int botaoB = A1;
+const int botaoC = A2;
+const int botaoD = A3;
+
+void setup() {
+  pinMode(botaoA, INPUT_PULLUP);
+  pinMode(botaoB, INPUT_PULLUP);
+  pinMode(botaoC, INPUT_PULLUP);
+  pinMode(botaoD, INPUT_PULLUP);
+
+  Serial.begin(9600);
+}
+
+void loop() {
+  if (digitalRead(botaoA) == LOW) {
+    enviarResposta("A");
+    aguardarBotaoLiberar(botaoA);
+  }
+  
+  if (digitalRead(botaoB) == LOW) {
+    enviarResposta("B");
+    aguardarBotaoLiberar(botaoB);
+  }
+  
+  if (digitalRead(botaoC) == LOW) {
+    enviarResposta("C");
+    aguardarBotaoLiberar(botaoC);
+  }
+  
+  if (digitalRead(botaoD) == LOW) {
+    enviarResposta("D");
+    aguardarBotaoLiberar(botaoD);
+  }
+}
+
+void enviarResposta(String resposta) {
+  Serial.println("Resposta do usuário: " + resposta);
+}
+
+void aguardarBotaoLiberar(int botaoPin) {
+  while (digitalRead(botaoPin) == LOW) {
+    // Aguarda até que o botão seja liberado
+  }
+  delay(100);  // Pequeno atraso para evitar múltiplas leituras de botão
+}
